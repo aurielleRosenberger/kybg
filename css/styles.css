@@ -1,0 +1,171 @@
+/* *******************************************************************
+***
+*Original Author: Auri Rosenberger
+*Date Created: 26, August 2021
+*Version: 1
+*Date Last Modified: 22, September 2021
+*Modified by: Auri Rosenberger
+*Modification log:
+
+- 08/27/2021 - Added background image with gradient, source (Sayeed Ahmad): https://dribbble.com/shots/15938812-Pest-Control-Icon-Set#
+             - Added distressed customer making phonecall icon: https://thenounproject.com/term/distress-phone-call/2767326/
+             - Added house icon: https://www.kindpng.com/imgv/hwxxwTm_computer-icons-building-architectural-engineering-house-house-icon/
+             - Added exterminator spraying insecticide icon: https://www.pngitem.com/middle/hxiwwim_15-control-vector-pest-for-free-download-on/
+             - Added colors to Bootstrap cards
+- 09/02/2021 - Fixed background image URL
+             -x Added orange plus and minus jpgs (no longer has purpose since slideshow improvement/replacement)
+             - Added some other CSS for FAQ page (I think from one of the Chapter 6 exercises)
+- 09/03/2021 - Created a.faq-anchor with !important in order to overpower Bootstrap
+- 09/08/2021 - Added left and right arrow icons from: https://www.pngitem.com/middle/TTTThii_arrow-left-right-28-transparent-background-images-icons/
+             - Brought in a couple pieces of CSS from Chapter 9's slide_show_fading_2
+- 09/09/2021 - Commented out some CSS from old FAQ JavaScript
+             - Tweaked CSS for slideshow images
+             - Brought in some CSS from Chapter 11's accordion
+- 09/17/2021 - Added CSS for @media to fix hamburger and for webpages to be mobile-friendly (revisited the 22nd)
+             - Added @import for Google fonts into CSS and targeted accordingly, only two fonts (revisited the 22nd)
+             - Added green border to newsletter.html and contact.html pages (revisited the 22nd)
+- 09/22/2021 - CSS on index.html will disable page service icons for mobile viewing
+***
+******************************************************************** */
+
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&family=Righteous&display=swap');
+
+#bugsIconBackground {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.631)), url(../images/iconSetPestControl.jpg);
+    background-size: 360px;
+    background-position: center;
+    background-repeat: repeat;
+}
+
+.bugOrange {
+    background-color: rgb(241,124,8);
+}
+
+.bugGreen {
+    background-color: rgb(23,184,108);
+}
+
+/* ------------------------------------------------------- */
+
+
+h2 {
+    color: rgb(241,124,8);
+    font-size: 120%;
+    padding: .55em 35px .25em 35px;
+    /* cursor: pointer;
+    background: url(../images/plus.jpg) no-repeat left center; */
+    
+}
+h2.minus {
+    /* background: url(../images/minus.jpg) no-repeat left center; */
+}
+
+a {
+    text-decoration: none; 
+}
+
+/* div.faqControls {
+    display: none;
+}
+
+a.faq-anchor {
+    color: black !important;
+}
+
+div.open.faqControls {
+    display: block;
+} */
+
+ul {
+    padding-left: 45px;
+}
+
+li {
+    padding-bottom: .25em;
+}
+
+p {
+    padding-bottom: .25em;
+    padding-left: 25px;
+}
+
+/* ----- CSS for pest_library.html ----- */
+
+img.service-icon {
+    height: 300px;
+}
+
+#slides img {
+    height: 250px;
+	display: none;
+}
+
+#slide {
+    height: 250px;
+}
+
+/* jQuery Accordion */
+
+section {
+	padding: 15px 25px;
+    width: 650px;
+    margin: 0 auto;
+}
+
+#accordion > h3.ui-state-active {
+    background: rgb(23,184,108);
+    border: 1px solid rgb(16, 154, 89);
+}
+
+.frontPage {
+    margin-top: 10%;
+    font-family: 'Righteous', cursive;
+}
+
+body, nav, main, .contentSquished > #accordion, .contentSquished > h1, .lead, footer {
+    font-family: 'Advent Pro', sans-serif;
+}
+
+.greenBorder {
+    border: 4px solid rgb(23,184,108);
+    border-radius: 3px;
+}
+
+/* Media Query for Laptop Viewport */
+@media screen and (max-width: 1024px) {
+    img.service-icon {
+        max-height: 350px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    img.service-icon {
+        /* max-height: 200px; */
+        display: none;
+    }
+}
+
+/* Media Query for Mobile Viewport */
+@media screen and (max-width: 500px) {
+
+    .contentSquished {
+        max-width: 300px;
+        text-align: center;
+        padding: 10px;
+    }
+    .buttonPlace {
+        vertical-align: middle;
+        padding: .5rem 1rem;
+    }
+    .copyrightPlace {
+        text-align: center;
+        padding: 10px;
+    }
+    #slide {
+        max-height: 150px;
+        max-width: 270px;
+    }
+    /* img.service-icon {
+        display: none;
+    } */
+}

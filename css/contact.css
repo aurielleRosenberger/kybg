@@ -1,0 +1,111 @@
+/* *******************************************************************
+***
+*Original Author: Auri Rosenberger
+*Date Created: 26, August 2021
+*Version: 1
+*Date Last Modified: 17, September 2021
+*Modified by: Auri Rosenberger
+*Modification log:
+
+- 09/03/2021 - Created contact.css
+             -x Added contact icon: https://www.creativefabrica.com/product/contact-icon-6/ (Took out, need more time 
+                to position it correctly)
+             - Span color
+             - Brought in some CSS that was included from Chapter 6's register_2.0
+- 09/17/2021 - Added CSS for @media to fix hamburger and for webpages to be mobile-friendly (revisited the 22nd)
+             - Added @import for Google fonts into CSS and targeted accordingly, only two fonts (revisited the 22nd)
+             - Added green border to newsletter.html and contact.html pages (revisited the 22nd)
+***
+******************************************************************** */
+
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&family=Righteous&display=swap');
+
+#bugsIconBackground {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.631)), url(../images/iconSetPestControl.jpg);
+    background-size: 360px;
+    background-position: center;
+    background-repeat: repeat;
+}
+
+/* img {
+    position: absolute;
+    margin-left: -10em;
+    max-width: 10%;
+  } */
+
+div {
+    margin-bottom: 1em;
+}
+
+label {
+    display: inline-block;
+    width: 11em;
+    text-align: right;
+    vertical-align: top;
+}
+
+input, select, textarea {
+    margin-left: 1em;
+    margin-right: 0.5em;
+}
+
+select { 
+    width: 13em; 
+}
+
+textarea {
+    height: 5em;
+    width: 20em;
+}
+
+span {
+    color: rgb(241,124,8);
+    vertical-align: top;
+}
+
+.messages {
+    color: rgb(23,184,108);
+    padding: 2em;
+    margin-bottom: 2em;
+}
+
+.frontPage {
+    margin-top: 10%;
+    font-family: 'Righteous', cursive;
+}
+
+body, nav, main, .contentSquished > #accordion, .contentSquished > h1, footer {
+    font-family: 'Advent Pro', sans-serif;
+}
+
+.greenBorder {
+    border: 4px solid rgb(23,184,108);
+    border-radius: 3px;
+}
+
+/* Media Query for Mobile Viewport */
+@media screen and (max-width: 500px) {
+
+    .contentSquished {
+        max-width: 300px;
+        text-align: center;
+        padding: 10px;
+    }
+    .buttonPlace {
+        vertical-align: middle;
+        padding: .5rem 2rem;
+    }
+    .copyrightPlace {
+        text-align: center;
+        padding: 10px;
+    }
+    .labelLatel {
+        align-items: center;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    .limitComments {
+        padding: 20px;
+        max-width: 220px;
+    }
+}
