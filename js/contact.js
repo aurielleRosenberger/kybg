@@ -71,7 +71,7 @@ const processEntries = () => {
 
     if (msgs.length == 0) {
         // alert("Submission successful! We'll be in contact!");
-        resetForm(); //
+//        resetForm();
     }
     else {
         displayErrorMsgs(msgs);

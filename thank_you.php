@@ -1,7 +1,7 @@
 <?php 
 //Read input from POST
 
-$email_address = filter_input(INPUT_POST, 'email_address');
+$email_address = filter_input(INPUT_POST, 'email_address2');
 //$email_address = 'a@a.com';
 $phone = filter_input(INPUT_POST, 'phone');
 //$phone = '111-111-1111';

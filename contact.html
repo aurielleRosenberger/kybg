@@ -91,12 +91,14 @@
         <form action="thank_you.php" method="post">
             <div>
                 <label for="email_address">E-Mail:&nbsp;</label>
-                <input type="text" name="email_address" id="email_address" value="">
+                <input type="text" name="email_address2"
+                       id="email_address" required>
                 <span>*</span>
             </div>
             <div>
                 <label for="phone">Mobile Phone:&nbsp;</label>
-                <input type="text" name="phone" id="phone" value="">
+                <input type="text" name="phone"
+                       id="phone" required>
                 <span>*</span>
             </div>
 
@@ -117,12 +119,14 @@
 
             <div class="labelLatel">
                 <label>Terms of Service:&nbsp;</label>
-                <input type="checkbox" name="terms" id="terms">&nbsp;I accept
+                <input type="checkbox" name="terms"
+                       id="terms" required>&nbsp;I accept
                 <span>*</span>
             </div>
             <div>
                 <label for="comments" class="labelLatel">Comments (briefly describe issue):&nbsp;</label>
-                <textarea name="comments" id="comments" class="limitComments"></textarea>
+                <textarea name="comments" id="comments"
+                          class="limitComments" required></textarea>
                 <span>*</span>
             </div>
             <div>
