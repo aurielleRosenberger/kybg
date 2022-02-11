@@ -4,13 +4,18 @@
 // -------- ----------- -----------------------------------
 // Auri     02/04/2022  Initial deployment to show visit
 //                      info by employee.
+// Auri     02/11/2022  Refactor to use database/db
+//                      constructor and visit functions.
 //*********************************************************
 
     try {
-        $dsn = 'mysql:host=localhost;dbname=kybgpc';
-        $username = 'pcuser';
-        $password = 'Pa$$w0rd';
-        $db = new PDO($dsn, $username, $password);
+//        $dsn = 'mysql:host=localhost;dbname=kybgpc';
+//        $username = 'pcuser';
+//        $password = 'Pa$$w0rd';
+//        $db = new PDO($dsn, $username, $password);
+    require_once ('./model/database.php');
+    require_once ('./model/visit.php');
+    require_once ('./model/employee.php');
     } catch (PDOException $ex) {
         $error_message = $e->getMessage();
         echo 'DB Error: ' . $error_message;
@@ -38,23 +43,8 @@
         }
         // Set query, prepare, bind if needed, execute
         try {
-            $queryEmployee = 'SELECT * FROM employee';
-            $statement1 = $db->prepare($queryEmployee);
-            $statement1->execute();
-            $employees = $statement1;
-            
-            $queryVisit =
-               'SELECT *
-                FROM visit
-                JOIN employee
-                ON visit.employee_id = employee.employee_id
-                WHERE employee.employee_id = :employee_id
-                ORDER BY visit_date';
-            $statement2 = $db->prepare($queryVisit);
-            $statement2->bindValue(":employee_id", $employee_id);
-            $statement2->execute();
-            $visits = $statement2;
-            
+            $employees = EmployeeDB::getEmp();
+            $visits = getVisitByEmp($employee_id);            
             
         } catch (PDOException $ex) {
             $error_message = $e->getMessage();
@@ -65,11 +55,12 @@
                 FILTER_VALIDATE_INT);
         $employee_id = filter_input(INPUT_POST, 'employee_id',
                 FILTER_VALIDATE_INT);
-        $queryDelete = 'DELETE FROM visit WHERE visit_id = :visit_id';
-        $statement3 = $db->prepare($queryDelete);
-        $statement3->bindValue(":visit_id", $visit_id);
-        $statement3->execute();
-        $statement3->closeCursor();
+        delVisit($visit_id);
+//        $queryDelete = 'DELETE FROM visit WHERE visit_id = :visit_id';
+//        $statement3 = $db->prepare($queryDelete);
+//        $statement3->bindValue(":visit_id", $visit_id);
+//        $statement3->execute();
+//        $statement3->closeCursor();
         header("Location: admin.php?employee_id=$employee_id");
     }
 ?>
@@ -152,6 +143,14 @@
           <li class="nav-item">
             <a class="nav-link" href="newsletter.html">Newsletter</a>
           </li>
+          
+          <!-- 02/11/2022 ~ New navigation hyperlinks for pages -->
+          <li class="nav-item">
+            <a class="nav-link" href="admin.php">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="list_employees.php">Employee List</a>
+          </li>
       </ul>
     </div>
     </nav>
@@ -173,7 +172,10 @@
           </ul>
       </aside>
       
-      <table>
+      <!-- 02/11/2022 ~ Added temporary class and padding style
+                        to try and fix table display, needs
+                        more work-->
+      <table class="table-responsive" style="padding: 25px;">
           <tr>
               <th>Email</th><!<!-- First Name -->
               <th>Phone Number</th><!-- Last Name -->

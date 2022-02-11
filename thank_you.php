@@ -1,4 +1,10 @@
-<?php 
+<?php
+/* Date           User            Description
+ * -----------------------------------------------------------------
+ * 01/21/2022     Arosenberger    Initial creation of thank you page.
+ * 
+ */
+
 //Read input from POST
 
 $email_address = filter_input(INPUT_POST, 'email_address2');
@@ -43,30 +49,34 @@ if ($email_address == NULL || $phone == NULL ||
 } else {
     //Data is valid, define PDO & insert data.
     try {
-        $dsn = 'mysql:host=localhost;dbname=kybgpc';
-        $username = 'pcuser';
-        $password = 'Pa$$w0rd';
-        $db = new PDO($dsn, $username, $password);
+//        $dsn = 'mysql:host=localhost;dbname=kybgpc';
+//        $username = 'pcuser';
+//        $password = 'Pa$$w0rd';
+//        $db = new PDO($dsn, $username, $password);
+        require_once ('./model/database.php');
+        require_once ('./model/visit.php');
+//        $db = Database::getDB();
+        addVisit($email_address, $phone, $contact, $terms, $comments);
     } catch (PDOException $ex) {
         $error_message = $e->getMessage();
         echo 'DB Error: ' . $error_message;
     }
     
     //Add to database - query | prepare | bind | execute |close
-    $query = 'INSERT INTO visit
-	(email_address, phone_number, contact_method, tos,
-            visit_comment, visit_date, employee_id)
-        VALUES
-	(:email_address, :phone, :contact, :terms, :comments,
-            NOW(), 1)';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':email_address', $email_address);
-    $statement->bindValue(':phone', $phone);
-    $statement->bindValue(':contact', $contact);
-    $statement->bindValue(':terms', $terms);
-    $statement->bindValue(':comments', $comments);
-    $statement->execute();
-    $statement->closeCursor();
+//    $query = 'INSERT INTO visit
+//	(email_address, phone_number, contact_method, tos,
+//            visit_comment, visit_date, employee_id)
+//        VALUES
+//	(:email_address, :phone, :contact, :terms, :comments,
+//            NOW(), 1)';
+//    $statement = $db->prepare($query);
+//    $statement->bindValue(':email_address', $email_address);
+//    $statement->bindValue(':phone', $phone);
+//    $statement->bindValue(':contact', $contact);
+//    $statement->bindValue(':terms', $terms);
+//    $statement->bindValue(':comments', $comments);
+//    $statement->execute();
+//    $statement->closeCursor();
 }
 
 ?>
@@ -151,6 +161,14 @@ if ($email_address == NULL || $phone == NULL ||
           </li>
           <li class="nav-item">
             <a class="nav-link" href="newsletter.html">Newsletter</a>
+          </li>
+          
+          <!-- 02/11/2022 ~ New navigation hyperlinks for pages -->
+          <li class="nav-item">
+            <a class="nav-link" href="admin.php">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="list_employees.php">Employee List</a>
           </li>
       </ul>
     </div>

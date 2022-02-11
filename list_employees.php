@@ -1,3 +1,24 @@
+<?php 
+
+/* Date           User            Description
+ * -----------------------------------------------------------------
+ * 02/11/2022     Arosenberger    Initial creation of page to list
+ *                                employee data.
+ * 
+ */
+
+        $dsn = 'mysql:host=localhost;dbname=kybgpc';
+        $username = 'pcuser';
+        $password = 'Pa$$w0rd';
+        $db = new PDO($dsn, $username, $password);
+
+        require_once ('./model/database.php');
+        require_once ('./model/employee.php');
+        
+        $employees = EmployeeDB::getEmployees();
+
+?>
+
 <!doctype html>
 <!-------------------------------------------------------
   ---
@@ -94,56 +115,17 @@
     <!-- Main Content Area -->
     <main class="container my-5 contentSquished greenBorder">
 
-      <h1>Get in Contact (Request Service)</h1>
-      <!-- <img src="images/contact.jpg" alt="Contact icon"> -->
-        <form action="thank_you.php" method="post">
-            <div>
-                <label for="email_address">E-Mail:&nbsp;</label>
-                <input type="text" name="email_address2"
-                       id="email_address" required>
-                <span>*</span>
-            </div>
-            <div>
-                <label for="phone">Mobile Phone:&nbsp;</label>
-                <input type="text" name="phone"
-                       id="phone" required>
-                <span>*</span>
-            </div>
-
-            <div class="labelLatel">
-                <label>Contact me by:&nbsp;</label>
-                <input type="radio" name="contact" id="text"
-                       value="text" checked>&nbsp;Text
-                
-                <input type="radio" name="contact" id="email"
-                    value="email">&nbsp;E-mail
-
-                <input type="radio" name="contact" id="mobile_phone" 
-                    value="mobile_phone">&nbsp;Mobile phone
-
-                <input type="radio" name="contact" id="none"
-                    value="none">&nbsp;Don't contact me
-            </div>
-
-            <div class="labelLatel">
-                <label>Terms of Service:&nbsp;</label>
-                <input type="checkbox" name="terms"
-                       id="terms" required>&nbsp;I accept
-                <span>*</span>
-            </div>
-            <div>
-                <label for="comments" class="labelLatel">Comments (briefly describe issue):&nbsp;</label>
-                <textarea name="comments" id="comments"
-                          class="limitComments" required></textarea>
-                <span>*</span>
-            </div>
-            <div>
-                <label>&nbsp;</label>
-                <input type="submit" id="submit" value="Submit" class="buttonPlace">
-                <input type="button" id="reset_form" value="Reset" class="buttonPlace">
-            </div>
-
-        </form>
+      <h1>Employee List</h1>
+      <p>
+      <ul style="list-style-type: none;">
+          <?php foreach ($employees as $employee) : ?>
+          <li> <?php echo $employee->getLastName() . ', '
+                  . $employee->getFirstName(); ?> </li>
+          <?php endforeach; ?>
+      </ul>
+      </p>
+      
+      <!-- Old form spot -->
 
     </main>
 
