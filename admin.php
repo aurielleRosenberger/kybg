@@ -6,22 +6,26 @@
 //                      info by employee.
 // Auri     02/11/2022  Refactor to use database/db
 //                      constructor and visit functions.
+//                      New navigation hyperlinks for admin
+//                      and employee list pages.
+// Auri     02/17/2022  Added a couple text-center tags to
+//                      <main> and <table> for CSS
+//                      formatting.
 //*********************************************************
 
+require_once ('./util/secure_conn.php');
+require_once ('./util/valid_admin.php');
+
     try {
-//        $dsn = 'mysql:host=localhost;dbname=kybgpc';
-//        $username = 'pcuser';
-//        $password = 'Pa$$w0rd';
-//        $db = new PDO($dsn, $username, $password);
-    require_once ('./model/database.php');
-    require_once ('./model/visit.php');
-    require_once ('./model/employee.php');
-    } catch (PDOException $ex) {
+        require_once ('./model/database.php');
+        require_once ('./model/visit.php');
+        require_once ('./model/employee.php');
+    } catch (PDOException $e) {
         $error_message = $e->getMessage();
         echo 'DB Error: ' . $error_message;
+        exit();
     }
 
-    //Check action
     $action = filter_input(INPUT_POST, 'action');
     if ($action == NULL) {
         $action = filter_input(INPUT_GET, 'action');
@@ -41,14 +45,12 @@
             }
             
         }
-        // Set query, prepare, bind if needed, execute
         try {
             $employees = EmployeeDB::getEmp();
             $visits = getVisitByEmp($employee_id);            
             
         } catch (PDOException $ex) {
-            $error_message = $e->getMessage();
-            echo 'DB Error: ' . $error_message;
+            echo 'Error: ' . $ex->getMessage();
         }
     } else if ($action == 'delete_visit') {
         $visit_id = filter_input(INPUT_POST, 'visit_id',
@@ -56,11 +58,6 @@
         $employee_id = filter_input(INPUT_POST, 'employee_id',
                 FILTER_VALIDATE_INT);
         delVisit($visit_id);
-//        $queryDelete = 'DELETE FROM visit WHERE visit_id = :visit_id';
-//        $statement3 = $db->prepare($queryDelete);
-//        $statement3->bindValue(":visit_id", $visit_id);
-//        $statement3->execute();
-//        $statement3->closeCursor();
         header("Location: admin.php?employee_id=$employee_id");
     }
 ?>
@@ -95,7 +92,7 @@
 	  <link rel="icon" sizes="192x192" href="images/android-chrome-192x192.png">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -144,7 +141,6 @@
             <a class="nav-link" href="newsletter.html">Newsletter</a>
           </li>
           
-          <!-- 02/11/2022 ~ New navigation hyperlinks for pages -->
           <li class="nav-item">
             <a class="nav-link" href="admin.php">Admin</a>
           </li>
@@ -156,7 +152,7 @@
     </nav>
 
     <!-- Main Content Area -->
-    <main class="container my-5 contentSquished greenBorder">
+    <main class="container my-5 contentSquished greenBorder text-center">
 
       <h1>Admin</h1>
       <h3>Select an employee to view the assigned visit information.</h3>
@@ -164,24 +160,20 @@
           <ul style="list-style-type: none;">
               <?php foreach ($employees as $employee) : ?>
               <li>
-                  <a href="?employee_id=<?php echo $employee['employee_id']; ?>">
+                  <a id="adminNameLinks" href="?employee_id=<?php echo $employee['employee_id']; ?>">
                       <?php echo$employee['first_name'] . ' ' . $employee['last_name']; ?>
                   </a>
               </li>
               <?php endforeach; ?>
           </ul>
       </aside>
-      
-      <!-- 02/11/2022 ~ Added temporary class and padding style
-                        to try and fix table display, needs
-                        more work-->
-      <table class="table-responsive" style="padding: 25px;">
+      <table class="text-center">
           <tr>
-              <th>Email</th><!<!-- First Name -->
-              <th>Phone Number</th><!-- Last Name -->
-              <th>TOS</th><!-- Email -->
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>TOS</th>
               <th>Date</th>
-              <th>Contact Method</th><!-- Reason -->
+              <th>Contact Method</th>
               <th>Message</th>
           </tr>
           <?php foreach ($visits as $visit) : ?>
@@ -203,26 +195,7 @@
                   </form></td>
           </tr>
           <?php endforeach; ?>
-      </table>  
-           
-            
-      
-      
-      
-      
-      
-      <h4>Plan for Project 3:
-          <br>1. Read employee data
-          <br>2. Read visit data (for a particular employee)
-          <br>3. Add <i>for</i> loop to write out "category data"
-                 (in body, to create employee anchor links)
-          <br>4. Add <i>for</i> loop to write out "product data"
-                 (in body, to display visit info by employee)
-          <br>5. Add/set-up delete/update function and button
-                 to delete/update visitor comment(s)
-                 from database
-      </h4>
-      <!-- Old form spot -->
+      </table>
 
     </main>
 

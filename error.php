@@ -1,27 +1,9 @@
-<?php 
-
+<?php
 /* Date           User            Description
  * -----------------------------------------------------------------
- * 02/11/2022     Arosenberger    Initial creation of page to list
- *                                employee data. New navigation
- *                                hyperlinks for admin and employee
- *                                list pages.
- * 02/17/2022     Arosenberger    Added a text-center tag to <main>
- *                                for CSS formatting.
+ * 02/16/2022     Arosenberger    Initial creation of error page.
+ * 
  */
-
-        $dsn = 'mysql:host=localhost;dbname=kybgpc';
-        $username = 'pcuser';
-        $password = 'Pa$$w0rd';
-        $db = new PDO($dsn, $username, $password);
-        
-        require_once ('./util/secure_conn.php');
-        require_once ('./util/valid_admin.php');
-
-        require_once ('./model/database.php');
-        require_once ('./model/employee.php');
-        
-        $employees = EmployeeDB::getEmployees();
 
 ?>
 
@@ -107,6 +89,7 @@
             <a class="nav-link" href="newsletter.html">Newsletter</a>
           </li>
           
+          <!-- 02/11/2022 ~ New navigation hyperlinks for pages -->
           <li class="nav-item">
             <a class="nav-link" href="admin.php">Admin</a>
           </li>
@@ -118,17 +101,11 @@
     </nav>
 
     <!-- Main Content Area -->
-    <main class="container my-5 contentSquished greenBorder text-center">
+    <main class="container my-5 contentSquished greenBorder">
 
-      <h1>Employee List</h1>
-      <p>
-      <ul style="list-style-type: none; padding-left: 0px;">
-          <?php foreach ($employees as $employee) : ?>
-          <li> <?php echo $employee->getLastName() . ', '
-                  . $employee->getFirstName(); ?> </li>
-          <?php endforeach; ?>
-      </ul>
-      </p>
+      <h1>Unauthorized</h1>
+      <h3><?php echo $_SESSION['message']; ?></h3>
+      
 
     </main>
 

@@ -25,6 +25,7 @@
              - Added @import for Google fonts into CSS and targeted accordingly, only two fonts (revisited the 22nd)
              - Added green border to newsletter.html and contact.html pages (revisited the 22nd)
 - 09/22/2021 - CSS on index.html will disable page service icons for mobile viewing
+- 02/17/2022 - Added some CSS for admin.php page
 ***
 ******************************************************************** */
 
@@ -77,7 +78,7 @@ div.open.faqControls {
 } */
 
 ul {
-    padding-left: 45px;
+    padding-left: 0px; /* 45px */
 }
 
 li {
@@ -87,6 +88,25 @@ li {
 p {
     padding-bottom: .25em;
     padding-left: 25px;
+}
+
+/* ----- CSS for admin.php ----- */
+a#adminNameLinks {
+    color: rgb(241,124,8) !important;
+}
+
+a:hover#adminNameLinks {
+    color: rgb(255,162,0) !important;
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    font-size: small;
 }
 
 /* ----- CSS for pest_library.html ----- */
@@ -136,6 +156,7 @@ body, nav, main, .contentSquished > #accordion, .contentSquished > h1, .lead, fo
     img.service-icon {
         max-height: 350px;
     }
+    
 }
 
 @media screen and (max-width: 1023px) {
@@ -168,4 +189,10 @@ body, nav, main, .contentSquished > #accordion, .contentSquished > h1, .lead, fo
     /* img.service-icon {
         display: none;
     } */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }

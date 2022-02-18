@@ -31,7 +31,8 @@ function getVisitByEmp($employee_id) {
     $db = Database::getDB();
     $queryVisit =
                'SELECT visit.email_address, phone_number, 
-                   tos, visit_date, contact_method,  visit_comment
+                   tos, visit_date, contact_method, visit_comment, 
+                   visit_id, visit.employee_id
                 FROM visit
                 JOIN employee
                 ON visit.employee_id = employee.employee_id
